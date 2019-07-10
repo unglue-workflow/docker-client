@@ -1,14 +1,13 @@
-FROM ubuntu
+FROM php:7.3-cli
 
-COPY ./client.sh /
+WORKDIR /app
 
-RUN chmod +x /client.sh
-RUN apt-get update && apt-get install -yq --no-install-recommends \
-    apt-utils \
-    curl \
-    php7.2-cli \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+COPY /. /app
 
+RUN apt-get update && apt-get install -y wget
 
-CMD ["/client.sh", "app/vendor/bin/unglue"]
-ENTRYPOINT [ "app/vendor/bin/unglue watch" ]
+RUN wget https://github.com/unglue-workflow/client/raw/master/unglue.phar
+RUN chmod +x unglue.phar
+
+CMD ["watch", "--retry", "1"]
+ENTRYPOINT [ "/app/unglue.phar"]
