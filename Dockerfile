@@ -8,6 +8,6 @@ RUN chmod +x /usr/bin/unglue.phar
 ENV TIMEOUT 1000000
 ENV SERVER unglueserver:3000
 
-CMD ["watch", "--retry=1", "--timeout=${TIMEOUT}", "--server=${SERVER}"]
+CMD watch --retry=1 --timeout=$TIMEOUT --server=$SERVER
 
 ENTRYPOINT ["php", "/usr/bin/unglue.phar"]
