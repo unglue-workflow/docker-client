@@ -11,7 +11,22 @@ unglueclient:
       - ./:/app
 ```
 
+## ENV vars
+
+SERVER=unglueserver:3000
+TIMEOUT=1000000
+
+```yml
+unglueclient:
+    image: unglue/client:latest
+    environment:
+     - SERVER=myunglueserver:3333
+     - TIMEOUT=1000000
+    volumes:
+      - ./:/app
+```
+
 ## Development
 
-build `docker build --no-cache -t uclient .`
-run `docker run uclient` (will watch until server server is online)
+1.) build `docker build --no-cache -t uclient .`
+2.) run `docker run uclient` (the script will wait to run until the given server is online).
