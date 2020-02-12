@@ -11,17 +11,12 @@ unglueclient:
       - ./:/app
 ```
 
-## ENV vars
-
-SERVER=unglueserver:3000
-TIMEOUT=1000000
+## Override command with custom data
 
 ```yml
 unglueclient:
     image: unglue/client:latest
-    environment:
-     - SERVER=myunglueserver:3333
-     - TIMEOUT=1000000
+    command: ["watch", "--retry=1", "--timeout=9000000", "--server=localhost:3000"]
     volumes:
       - ./:/app
 ```
